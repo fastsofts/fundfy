@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.fundfy.kycsanctions'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.eclipse.jetty:jetty-server:11.0.15'
+    implementation 'org.eclipse.jetty:jetty-servlet:11.0.15'
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+}
+
+application {
+    mainClass = 'com.fundfy.kycsanctions.Main'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.fundfy.kycsanctions.Main'
+    }
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.runtimeClasspath
+    into "$buildDir/libs/lib"
+}
